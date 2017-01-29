@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using System.IO;
 using System.Xml.Linq;
+using ConvertXamlToResource.Models;
 
 namespace ConvertXamlToResource.Files
 {
@@ -13,12 +14,12 @@ namespace ConvertXamlToResource.Files
         {
         }
 
-        public List<XDocument> GetAllLocalXamlFiles()
+        public List<XDocAndPath> GetAllLocalXamlFiles()
         {
             var dir = System.AppContext.BaseDirectory;
 
             string[] files = Directory.GetFiles(dir);
-            var list = new List<XDocument>();
+            var list = new List<XDocAndPath>();
             
             foreach(var path in files)
             {                
@@ -26,7 +27,10 @@ namespace ConvertXamlToResource.Files
                     continue;
 
                 var doc = XDocument.Load(path);                
-                list.Add(doc);
+                list.Add(new XDocAndPath{
+                    Document = doc,
+                    Path = path
+                });
             }
             return list;
         }
