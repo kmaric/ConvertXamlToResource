@@ -21,9 +21,11 @@ namespace ConvertXamlToResource
         {
             Console.WriteLine("Scaning local directory...");
             var xReader = new Files.XamlReader();
+            var xWriter = new Files.XamlWriter();
+
             var xamls = xReader.GetAllLocalXamlFiles();
-
-
+            xWriter.ChangeXamlFilesToResource(xamls);
+            
 
         }
     }

@@ -1,5 +1,4 @@
 using System;
-using System.Reflection;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -14,22 +13,22 @@ namespace ConvertXamlToResource.Files
         {
         }
 
-        public IEnumerable<XDocument> GetAllLocalXamlFiles()
+        public List<XDocument> GetAllLocalXamlFiles()
         {
-            var dir = typeof(Program).GetTypeInfo().Assembly.Location;                   
+            var dir = System.AppContext.BaseDirectory;
 
             string[] files = Directory.GetFiles(dir);
-
+            var list = new List<XDocument>();
+            
             foreach(var path in files)
-            {
-                if(!Path.GetExtension(path).Equals("xaml", StringComparison.OrdinalIgnoreCase))
+            {                
+                if(!Path.GetExtension(path).Equals(".xaml", StringComparison.OrdinalIgnoreCase))
                     continue;
 
-                // var doc = XDocument.Load(path);
-                Console.WriteLine(path);
-                // yield return doc;
+                var doc = XDocument.Load(path);                
+                list.Add(doc);
             }
-            return null;
+            return list;
         }
     }
 }
