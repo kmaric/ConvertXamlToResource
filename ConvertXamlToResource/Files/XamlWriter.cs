@@ -64,16 +64,12 @@ namespace ConvertXamlToResource.Files
 
         private void WriteXamlToPath(XDocument doc, string path)
         {
-            var sb = new StringBuilder();
-            var xws = new XmlWriterSettings();
-            xws.OmitXmlDeclaration = true;
-            xws.Indent = true;
+            //var settings = new XmlWriterSettings();
+            //settings.Encoding = new UTF8Encoding(false);
+            //settings.Indent = true;
 
-            using (XmlWriter xw = XmlWriter.Create(sb, xws))
-            {
-                doc.Save(xw);
-                
-            }
+            doc.Save(path);
+
         }
 
     }

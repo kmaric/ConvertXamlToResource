@@ -16,7 +16,8 @@ namespace ConvertXamlToResource.Files
 
         public List<XDocAndPath> GetAllLocalXamlFiles()
         {
-            var dir = System.AppContext.BaseDirectory;
+            //var dir = System.AppContext.BaseDirectory;
+            var dir = Environment.CurrentDirectory;
 
             string[] files = Directory.GetFiles(dir);
             var list = new List<XDocAndPath>();
