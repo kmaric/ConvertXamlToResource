@@ -24,6 +24,8 @@ namespace ConvertXamlToResource
             var xWriter = new Files.XamlWriter();
 
             var xamls = xReader.GetAllLocalXamlFiles();
+
+
             xWriter.ChangeXamlFilesToResource(xamls);
 
             Console.WriteLine("Conversion is finished");

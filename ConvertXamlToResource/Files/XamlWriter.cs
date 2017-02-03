@@ -67,7 +67,8 @@ namespace ConvertXamlToResource.Files
             //var settings = new XmlWriterSettings();
             //settings.Encoding = new UTF8Encoding(false);
             //settings.Indent = true;
-
+            
+            
             doc.Save(path);
 
         }

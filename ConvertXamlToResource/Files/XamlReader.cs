@@ -27,7 +27,12 @@ namespace ConvertXamlToResource.Files
                 if(!Path.GetExtension(path).Equals(".xaml", StringComparison.OrdinalIgnoreCase))
                     continue;
 
-                var doc = XDocument.Load(path);                
+                var doc = XDocument.Load(path);
+
+                //already resource file
+                if (doc.Descendants("ResourceDictionary").Any())
+                    continue;
+
                 list.Add(new XDocAndPath{
                     Document = doc,
                     Path = path
