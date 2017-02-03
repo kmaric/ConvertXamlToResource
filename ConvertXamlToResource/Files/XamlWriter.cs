@@ -53,7 +53,7 @@ namespace ConvertXamlToResource.Files
             var rootName = doc.Root.Attribute("Name")?.Value ?? defaultName;
             
             //set root name attribute as key 
-            doc.Root.Add(new XAttribute(xmlnsX + "key", rootName));
+            doc.Root.Add(new XAttribute(xmlnsX + "Key", rootName));
 
             //remove name attributes
             doc.Descendants().Attributes("Name").Remove();
