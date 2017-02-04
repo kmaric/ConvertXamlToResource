@@ -51,26 +51,21 @@ namespace ConvertXamlToResource.Files
         {
             var defaultName = "";
             var rootName = doc.Root.Attribute("Name")?.Value ?? defaultName;
-            
-            //set root name attribute as key 
-            doc.Root.Add(new XAttribute(xmlnsX + "Key", rootName));
+
+            var root = new XElement(xmlns + "DataTemplate",
+                new XAttribute(xmlnsX + "Key", rootName.ToLower()));
 
             //remove name attributes
             doc.Descendants().Attributes("Name").Remove();
+            root.Add(doc.Root);
 
-            return doc.Root;
+            return root;
         }                     
 
 
         private void WriteXamlToPath(XDocument doc, string path)
         {
-            //var settings = new XmlWriterSettings();
-            //settings.Encoding = new UTF8Encoding(false);
-            //settings.Indent = true;
-            
-            
             doc.Save(path);
-
         }
 
     }

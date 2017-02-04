@@ -9,8 +9,9 @@ namespace ConvertXamlToResource
     {
         public static void Main(string[] args)
         {
-            // Console.WriteLine("Press any key to start conversion of files!");
-            // var input = Console.ReadLine();
+            Console.WriteLine("Press any key to start conversion of files!");
+            var input = Console.ReadLine();
+
 
             StartWorking();
 
