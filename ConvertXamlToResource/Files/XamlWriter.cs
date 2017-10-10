@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using System.Xml.Linq;
 using System.IO;
+using System.Reflection.Emit;
 using ConvertXamlToResource.Models;
 using System.Xml;
 using System.Text;
@@ -14,21 +15,33 @@ namespace ConvertXamlToResource.Files
     {
         private static XNamespace xmlns = "http://schemas.microsoft.com/winfx/2006/xaml/presentation";
         private static XNamespace xmlnsX = "http://schemas.microsoft.com/winfx/2006/xaml";
+        public string Dir { get; set; }
 
-        public XamlWriter()
+        /// <summary>
+        /// Constructror for XmlWritter class
+        /// </summary>
+        /// <param name="directory">If not passed. resources directory will be used</param>
+        public XamlWriter(string directory = "resources")
         {
+            Dir = directory;
         }
 
+        
         public void ChangeXamlFilesToResource(List<XDocAndPath> list)
-        {            
-            foreach(var pair in list)
+        {
+            System.IO.Directory.CreateDirectory(Dir);
+            foreach (var pair in list)
             {
-                Console.WriteLine($"Converting {Path.GetFileName(pair.Path)}");
+                if(string.IsNullOrEmpty(pair.Path))
+                    continue;
+
+                var path = Path.Combine(Dir, Path.GetFileName(pair.Path));
+                Console.WriteLine($"Converting {path}");
                 var element = StreamAndEditDocument(pair.Document);
 
                 var doc = GetResourceDocumentRoot(element);
 
-                WriteXamlToPath(doc, pair.Path);
+                WriteXamlToPath(doc, path);
             }
         }
 
